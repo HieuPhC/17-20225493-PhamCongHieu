@@ -1,6 +1,6 @@
 package hust.soict.dsai.test.cart;
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class CartTest {
     public static void main(String[] args) {
@@ -11,9 +11,10 @@ public class CartTest {
         "George Lucas",87,24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin","Animation",18.99f);
 
-        DigitalVideoDisc dvds[] = {dvd1,dvd2,dvd3};
-        //cart.addDigitalVideoDisc(dvd1,dvd2,dvd3);
-        cart.addDigitalVideoDisc(dvds);
+        cart.adMedia(dvd1);
+        cart.adMedia(dvd2);
+        cart.adMedia(dvd3);
+
         //Test the print method
         cart.print();
         //Test the search methods

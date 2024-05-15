@@ -1,6 +1,5 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.debug.settings.showQualifiedNames": false,
-    "java.debug.settings.showStaticVariables": true,
-    "git.ignoreLimitWarning": true
+    "java.debug.settings.showStaticVariables": true
 }
