@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims;
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Aims {
     public static void main(String[] args) {
@@ -11,9 +11,9 @@ public class Aims {
         "George Lucas",87,24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin","Animation",18.99f);
 
-        anOrder.addDigitalVideoDisc(dvd1);
-        anOrder.addDigitalVideoDisc(dvd2);
-        anOrder.addDigitalVideoDisc(dvd3);
+        anOrder.adMedia(dvd1);
+        anOrder.adMedia(dvd2);
+        anOrder.adMedia(dvd3);
 
         anOrder.print();
     }
