@@ -22,6 +22,21 @@ public class Track implements Playable{
         this.length = length;
     }
     @Override
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(obj instanceof Track){
+            Track s = (Track) obj;
+            return s.getTitle() == getTitle() && s.getLength() == getLength(); 
+        }
+        return false;
+    }
+    @Override
+    public String toString() {
+        return "Track - "+this.getTitle()+" - "+this.length+" min";
+    }
+    @Override
     public void play() {
         System.out.println("Playing Track: " + this.getTitle());
         System.out.println("Track length: " + this.getLength());;

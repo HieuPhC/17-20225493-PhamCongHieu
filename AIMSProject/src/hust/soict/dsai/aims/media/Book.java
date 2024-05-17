@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Book extends Media{
     private List<String> authors = new ArrayList<String>();
+    private static int nbbook = 0;
 
     public Book(String title,String category,float cost,List<String> authors){
-        super(title, category, cost);
+        super(nbbook++,title, category, cost);
         this.authors = authors;
     }
 
@@ -29,6 +30,9 @@ public class Book extends Media{
             authors.remove(author);
         }
     }
-       
-
+    
+    @Override
+    public String toString() {
+        return "Book - "+this.getTitle()+" - "+this.getCategory()+" - "+this.getAuthors().toString()+" - "+this.getCost()+"$";
+    }
 }
