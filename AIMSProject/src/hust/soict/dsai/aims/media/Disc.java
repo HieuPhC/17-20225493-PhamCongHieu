@@ -47,6 +47,7 @@ public class Disc extends Media{
     public void setLength(int length) {
         this.length = length;
     }
+
     @Override
     public String toString() {
         return "Disc - "+this.getTitle()+" - "+this.getCategory()+" - "+this.director+" - "+this.getCost()+"$";

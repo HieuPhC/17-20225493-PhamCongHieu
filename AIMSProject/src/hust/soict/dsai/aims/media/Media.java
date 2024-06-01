@@ -12,6 +12,10 @@ public abstract class Media implements Comparable<Media>{
             return Double.compare(this.getCost(), other.getCost());
         }
     }
+
+    public String playGUI(){
+        return "Playing media";
+    }
     
     private int id;
     private String title;
@@ -58,15 +62,21 @@ public abstract class Media implements Comparable<Media>{
         return false;
     }
 
-    public boolean equals(Object obj){
-        if(this == obj){
-            return true;
+    public boolean equals(Object o) {
+        try {
+            if (o instanceof Media) {
+                if (this.title == ((Media)o).title) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
         }
-        if(obj instanceof Media){
-            Media s = (Media) obj;
-            return s.getTitle() == getTitle();
-        }
-        return false;
+        catch (NullPointerException n){return false;}
     }
 
     public Media(int id,String title,String category,float cost){

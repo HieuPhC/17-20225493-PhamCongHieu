@@ -24,14 +24,12 @@ public class CartTest {
         Track track = new Track("Send me a podcast", 3);
         tracks.add(track);
         CompactDisc cd1 = new CompactDisc("Radio songs", "Road listening", 20.95f, "null", tracks);
-        CompactDisc cd2 = new CompactDisc("Sadio songs", "Road listening", 20.95f, "null", tracks);
 
         List<Media> al = new ArrayList<>();
 
         al.add(cd1);
         al.add(book1);
         al.add(dvd1);
-        al.add(cd2);
 
 
         // cart.addMedia(dvd1);

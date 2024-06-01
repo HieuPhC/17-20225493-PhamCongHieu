@@ -1,39 +1,40 @@
 package hust.soict.dsai.aims.cart;
 
-import hust.soict.dsai.aims.media.CompactDisc;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
-import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.media.*;
+import hust.soict.dsai.exception.PlayerException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import javax.naming.LimitExceededException;
+import javax.swing.*;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
-	private List<Media> itemsOrdered=new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
-    public int getNumberofItemsOrdered() {
-        return itemsOrdered.size();
+	public ObservableList<Media> getItemsOrdered() {
+		return itemsOrdered;
 	}
 
-    public boolean addMedia(Media media) {
-        if (!itemsOrdered.contains(media) && itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+	public int getNumberofItemsOrdered() {
+		return itemsOrdered.size();
+	}
+
+	// Add and remove media from cart
+	public String addMedia(Media media) throws LimitExceededException {
+		if (itemsOrdered.size() >= MAX_NUMBERS_ORDERED) {
+			throw new LimitExceededException("ERROR: The number of media has reached its limit");
+		} else if (itemsOrdered.contains(media)) {
+			return(media.getTitle() + " is already in the cart!");
+		} else {
 			itemsOrdered.add(media);
-			System.out.println("Added product to the cart: "+media.getTitle());
-			return true;
+			return (media.getTitle() + " has been added!");
 		}
-		else if (itemsOrdered.size() == MAX_NUMBERS_ORDERED) {
-            System.out.println("Unable to add product: "+media.getTitle()+" because the cart has already reached the maximum number of items.");
-            return false;			
-		}
-        else {
-            System.out.println("Unable to add product: "+media.getTitle()+" because the product is already in the cart");
-            return false;
-     	}
 	}
 
-    private boolean removeMedia(Media media) {
+    public boolean removeMedia(Media media) {
         if (itemsOrdered.contains(media)) {
             itemsOrdered.remove(media);
             System.out.println("Removed product from the cart: "+media.getTitle());
@@ -165,27 +166,29 @@ public class Cart {
 		itemsOrdered.clear();
 	}
 
-	public void playMedia() {
+	public void playMedia() throws PlayerException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Please enter the media name you want to play");
 		String title = input.nextLine();
-		
-        for (Media i : itemsOrdered){
-            if (i.isMatch(title)) {
-				if (i instanceof DigitalVideoDisc) {
-					((DigitalVideoDisc)i).play();
-					return;
-				}
-				else if (i instanceof CompactDisc) {
-					((CompactDisc)i).play();
-					return;
-				}
-				else {
+		for (Media i : itemsOrdered) {
+			if (i.isMatch(title)) {
+				if(i instanceof Playable){
+					((Playable) i).play();
+				} else {
 					System.out.println("The media you entered cannot be played.");
 					return;
 				}
 			}
 		}
 		System.out.println("Nothing has been played. Please recheck the name you entered.");
+	}
+
+    public String placeOrder() {
+		if (itemsOrdered.size() == 0) {
+			return "Your cart is empty!";
+		} else {
+			itemsOrdered.clear();
+			return "Order created!\n" + "Now your cart will be empty!";
+		}
 	}
 }
